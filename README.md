@@ -45,4 +45,4 @@ contact the author.
 
 ## Author
 
-Ahmet Can Kızılcan — Istanbul Technical University.
+Ahmet Can Kızılcan
