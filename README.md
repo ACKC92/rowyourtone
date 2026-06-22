@@ -1,5 +1,6 @@
+
 <p align="center">
-  <img src="Row_Your_Tone_App_Icon.png" alt="Row, Row, Row Your Tone icon" width="160" height="160">
+ <img width="160" height="160" alt="Row Your Tone App Icon" src="https://github.com/user-attachments/assets/a2a71a9a-8987-4d79-a853-eaf05e1d9a8a" />
 </p>
 
 <h1 align="center">Row, Row, Row Your Tone</h1>
