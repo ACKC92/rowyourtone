@@ -1,6 +1,4 @@
-<img width="100" height="100" alt="Row Your Tone App Icon" src="https://github.com/user-attachments/assets/5358f3d5-9b1f-4903-914a-f16971f87450" />
-
-## Row, Row, Row Your Tone
+# Row, Row, Row Your Tone
 
 A single-file, browser-based tool for **twelve-tone and post-tonal music analysis** —
 built for students and composers. No install, no build step, no server: one HTML file.
