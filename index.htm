@@ -17,7 +17,7 @@
 <title>Row, Row, Row Your Tone</title>
 <link rel="preconnect" href="https://fonts.googleapis.com/">
 <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="">
-<link href="Row,%20Row,%20Row%20Your%20Tone_files/css2_M2mZ.css" rel="stylesheet">
+<link href="index_files/css2_Tsmf.css" rel="stylesheet">
 <style>
   :root{
     --paper:#f4f4f1; --panel:#ffffff; --ink:#15161a; --muted:#74777f;
@@ -299,6 +299,8 @@
   .cite-copied.show{opacity:1}
   @media (max-width:640px){ .export-cluster{text-align:left} .export-cluster .exp-title,.exp-controls,.exp-note{justify-content:flex-start; text-align:left} }
   footer{margin-top:54px; color:var(--muted); font-family:var(--mono); font-size:11px; letter-spacing:.04em; text-align:center}
+  footer a{color:inherit; text-decoration:underline; text-underline-offset:2px}
+  footer a:hover{color:var(--accent)}
 
   /* ===== mode gate ===== */
   #mode-gate{margin-top:4px}
@@ -849,7 +851,7 @@ analysed with the same tools, scaled to your row.</span>
   </div><!-- /workspace -->
 
 
-  <footer>© 2026 Ahmet Can Kızılcan, Istanbul Technical University</footer>
+  <footer>© 2026 Ahmet Can Kızılcan · <a href="https://github.com/ACKC92/rowyourtone" target="_blank" rel="noopener noreferrer">Source on GitHub</a></footer>
 </div>
 
 <div class="modal-overlay" id="cite-modal" hidden="">
@@ -1900,7 +1902,7 @@ analysed with the same tools, scaled to your row.</span>
   const esc=s=>String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
 
   // ---------- citation ----------
-  const CITE={author:'Ahmet Can K\u0131z\u0131lcan', authorRev:'K\u0131z\u0131lcan, Ahmet Can', authorInit:'K\u0131z\u0131lcan, A. C.', title:'Twelve-Tone Row Analyser', year:'2026'};
+  const CITE={author:'Ahmet Can K\u0131z\u0131lcan', authorRev:'K\u0131z\u0131lcan, Ahmet Can', authorInit:'K\u0131z\u0131lcan, A. C.', title:'Twelve-Tone Row Analyser', year:'2026', url:'https://ackc92.github.io/rowyourtone/'};
   const CITE_LABELS={apa:'APA (7th ed.)', mla:'MLA (9th ed.)', 'chicago-b':'Chicago (bibliography)', 'chicago-ad':'Chicago (author\u2013date)', harvard:'Harvard', ieee:'IEEE', bibtex:'BibTeX'};
   function retrievedDate(){
     const d=new Date(), day=d.getDate(), y=d.getFullYear(), mi=d.getMonth();
@@ -1911,13 +1913,13 @@ analysed with the same tools, scaled to your row.</span>
   function citationText(fmt){
     const a=CITE, r=retrievedDate();
     switch(fmt){
-      case 'apa':        return a.authorInit+' ('+a.year+'). '+a.title+' [Computer software]. Retrieved '+r.mdy+'.';
-      case 'mla':        return a.authorRev+'. '+a.title+'. '+a.year+'. Computer software. Accessed '+r.dmy+'.';
-      case 'chicago-b':  return a.authorRev+'. '+a.title+'. '+a.year+'. Computer software. Accessed '+r.mdy+'.';
-      case 'chicago-ad': return a.authorRev+'. '+a.year+'. '+a.title+'. Computer software. Accessed '+r.mdy+'.';
-      case 'harvard':    return a.authorInit+' ('+a.year+') '+a.title+'. [Computer software]. (Accessed: '+r.dmy+').';
-      case 'ieee':       return 'A. C. K\u0131z\u0131lcan, '+a.title+'. ('+a.year+'). [Computer software]. Accessed: '+r.ieee+'.';
-      case 'bibtex':     return '@software{kizilcan'+a.year+'twelvetone,\n  author = {'+a.author+'},\n  title  = {'+a.title+'},\n  year   = {'+a.year+'},\n  note   = {Accessed '+r.dmy+'}\n}';
+      case 'apa':        return a.authorInit+' ('+a.year+'). '+a.title+' [Computer software]. Retrieved '+r.mdy+', from '+a.url+'.';
+      case 'mla':        return a.authorRev+'. '+a.title+'. '+a.year+'. Computer software. '+a.url+'. Accessed '+r.dmy+'.';
+      case 'chicago-b':  return a.authorRev+'. '+a.title+'. '+a.year+'. Computer software. Accessed '+r.mdy+'. '+a.url+'.';
+      case 'chicago-ad': return a.authorRev+'. '+a.year+'. '+a.title+'. Computer software. Accessed '+r.mdy+'. '+a.url+'.';
+      case 'harvard':    return a.authorInit+' ('+a.year+') '+a.title+'. [Computer software]. Available at: '+a.url+' (Accessed: '+r.dmy+').';
+      case 'ieee':       return 'A. C. K\u0131z\u0131lcan, '+a.title+'. ('+a.year+'). [Computer software]. Accessed: '+r.ieee+'. [Online]. Available: '+a.url;
+      case 'bibtex':     return '@software{kizilcan'+a.year+'twelvetone,\n  author = {'+a.author+'},\n  title  = {'+a.title+'},\n  year   = {'+a.year+'},\n  url    = {'+a.url+'},\n  note   = {Accessed '+r.dmy+'}\n}';
       default: return '';
     }
   }
