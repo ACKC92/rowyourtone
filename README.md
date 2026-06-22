@@ -51,7 +51,7 @@ You may use, copy, modify, and share this software **for noncommercial purposes*
 (including educational and academic use), provided you keep the required copyright notice.
 **Commercial use is not granted by this license**; for a commercial license, contact the author.
 
-> Required Notice: Copyright © 2026 Ahmet Can Kızılcan, Istanbul Technical University
+> Required Notice: Copyright © 2026 Ahmet Can Kızılcan
 
 ## Author
 
