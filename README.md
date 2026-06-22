@@ -3,12 +3,11 @@
 A single-file, browser-based tool for **twelve-tone and post-tonal music analysis** —
 built for students and composers. No install, no build step, no server: one HTML file.
 
-**▶ Live app: https://YOUR-USERNAME.github.io/REPO-NAME/**
-*(replace with your own link once GitHub Pages is enabled — see below)*
+**▶ Live app: https://ackc92.github.io/rowyourtone/**
 
 ## What it does
 
-Three analysis modes in one tool:
+Three analysis modes:
 
 - **Twelve-Tone Row Analyser** — build a row (click notes or type pitches/integers) and
   get the 12×12 matrix, all 48 forms (P / I / R / RI), set-class and subset analysis,
