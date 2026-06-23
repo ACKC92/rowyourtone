@@ -8,7 +8,7 @@
 <p align="center">
   A browser-based tool for <strong>twelve-tone and post-tonal music analysis</strong> —
   built for students and composers.<br>
-  Single standalone html file to row deez notes.
+  Single standalone html file for easy access.
 </p>
 
 <p align="center">
