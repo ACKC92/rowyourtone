@@ -1,5 +1,3 @@
-**[▶ Live App](https://ackc92.github.io/rowyourtone/)**
-
 <p align="center">
  <img width="160" height="160" alt="Row Your Tone App Icon" src="https://github.com/user-attachments/assets/a2a71a9a-8987-4d79-a853-eaf05e1d9a8a" />
 </p>
