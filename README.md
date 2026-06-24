@@ -7,7 +7,7 @@
 <p align="center">
   A browser-based tool for <strong>twelve-tone and post-tonal music analysis</strong> —
   built for students and composers.<br>
-  Single standalone html file for easy access.
+  Runs entirely in your browser — nothing to install.
 </p>
 
 <p align="center">
@@ -39,8 +39,9 @@ Just open the live link above in any modern browser. Nothing to download.
 
 ## Run it locally
 
-Download `index.html` and open it in a browser — that's the whole app. Fonts load from
-Google over the internet; offline, it falls back to system fonts and still works.
+Download `index.html`, `styles.css`, and `app.js` (keep them in the same folder) and open
+`index.html` in a browser — that's the whole app. Fonts load from Google over the internet;
+offline, it falls back to system fonts and still works.
 
 ## License
 
