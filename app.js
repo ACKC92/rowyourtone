@@ -279,7 +279,7 @@
   function clearHi(){ document.querySelectorAll('.cell.hi').forEach(c=>c.classList.remove('hi')); }
   function setReadout(i,j){
     const r=$('readout'); if(!state){r.innerHTML='';return;}
-    if(i==null){ const act=(window.matchMedia&&window.matchMedia('(hover: none)').matches)?'Tap':'Hover'; r.innerHTML=`<span class="k">${act} a cell to read its row &amp; column forms. Your input row is</span> <b>P${state.firstPc}</b>.`; return; }
+    if(i==null){ const act=(window.matchMedia&&window.matchMedia('(hover: none)').matches)?'Tap':'Hover'; r.innerHTML=`<span class="k">${act} a cell to read its row &amp; column forms; click a P / I / R / RI label to play that form. Your input row is</span> <b>P${state.firstPc}</b>.`; return; }
     const {M}=state, a=M[i][0], b=M[0][j], v=M[i][j];
     r.innerHTML=`<span class="k">row</span> <b>P${a}</b> &nbsp;<span class="k">·</span>&nbsp; <span class="k">col</span> <b>I${b}</b> &nbsp;<span class="k">·</span>&nbsp; <span class="k">cell</span> ${v} (${spellName(v)}) &nbsp;<span class="k">·</span>&nbsp; <span class="k">read ◂ for</span> R${a}<span class="k">, ▴ for</span> RI${b}`;
   }
@@ -334,12 +334,12 @@
     const mk=(cls,txt)=>{const d=document.createElement('div'); d.className=cls; if(txt!=null)d.textContent=txt; return d;};
 
     grid.appendChild(mk('corner tl'));
-    for(let j=0;j<N;j++) grid.appendChild(mk('lab top','I'+M[0][j]));
+    for(let j=0;j<N;j++){ const lab=mk('lab top lab-play','I'+M[0][j]); lab.dataset.pcs=M.map(r=>r[j]).join(','); lab.title='Play I'+M[0][j]+' (down this column)'; grid.appendChild(lab); }
     grid.appendChild(mk('corner'));
 
     for(let i=0;i<N;i++){
       const isIn=i===inputRowIndex;
-      grid.appendChild(mk('lab left'+(isIn?' inrow-lab':''),'P'+M[i][0]));
+      { const lab=mk('lab left lab-play'+(isIn?' inrow-lab':''),'P'+M[i][0]); lab.dataset.pcs=M[i].join(','); lab.title='Play P'+M[i][0]+' (this row, left to right)'; grid.appendChild(lab); }
       for(let j=0;j<N;j++){
         const c=mk('cell');
         // the input row preserves the user's chosen spellings
@@ -349,10 +349,10 @@
         if(isIn)  c.classList.add('inrow');
         cellEls[i][j]=c; grid.appendChild(c);
       }
-      grid.appendChild(mk('lab right'+(isIn?' inrow-lab':''),'R'+M[i][0]));
+      { const lab=mk('lab right lab-play'+(isIn?' inrow-lab':''),'R'+M[i][0]); lab.dataset.pcs=M[i].slice().reverse().join(','); lab.title='Play R'+M[i][0]+' (this row, right to left)'; grid.appendChild(lab); }
     }
     grid.appendChild(mk('corner'));
-    for(let j=0;j<N;j++) grid.appendChild(mk('lab bottom','RI'+M[0][j]));
+    for(let j=0;j<N;j++){ const lab=mk('lab bottom lab-play','RI'+M[0][j]); lab.dataset.pcs=M.map(r=>r[j]).slice().reverse().join(','); lab.title='Play RI'+M[0][j]+' (up this column)'; grid.appendChild(lab); }
     grid.appendChild(mk('corner'));
     for(let j=0;j<N;j++) cellEls[0][j].style.borderTop='1px solid var(--line-strong)';
 
@@ -362,6 +362,7 @@
     grid.addEventListener('mouseleave',()=>{clearHi(); setReadout(null);});
 
     grid.addEventListener('click', e=>{ const c=e.target.closest('.cell'); if(c) playPitch(M[+c.dataset.i][+c.dataset.j]); });
+    grid.addEventListener('click', e=>{ const lab=e.target.closest('.lab-play'); if(lab && lab.dataset.pcs) playSeq(lab.dataset.pcs.split(',').map(Number)); });
     scroll.appendChild(grid); host.innerHTML=''; host.appendChild(scroll);
     $('legend').style.display='flex'; setReadout(null);
   }
@@ -398,7 +399,7 @@
     ];
     wrap.innerHTML='';
     for(const f of fams){
-      const box=document.createElement('div'); box.className='fam';
+      const box=document.createElement('div'); box.className='fam fam-'+f.tag.toLowerCase();
       box.innerHTML=`<h3>${f.name} <span class="tag">${f.tag}0–${f.tag}11</span></h3>`;
       for(let n=0;n<12;n++){
         const line=document.createElement('div'); line.className='fline'+(n===f.mark?' mark':'');
