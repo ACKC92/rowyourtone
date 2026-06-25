@@ -19,10 +19,46 @@
 <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
+<script>
+(function(){
+  var KEY='rrrt-theme', root=document.documentElement;
+  function apply(t){ root.setAttribute('data-theme', t); }
+  function preferred(){
+    try{ var s=localStorage.getItem(KEY); if(s==='dark'||s==='light') return s; }catch(e){}
+    return (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) ? 'dark' : 'light';
+  }
+  apply(preferred());            /* set before first paint — no flash */
+  function wire(){
+    var btn=document.getElementById('theme-toggle'); if(!btn) return;
+    function sync(){
+      var dark = root.getAttribute('data-theme')==='dark';
+      btn.setAttribute('aria-label', dark?'Switch to light mode':'Switch to dark mode');
+      btn.setAttribute('aria-pressed', dark?'true':'false');
+      btn.title = dark?'Light mode':'Dark mode';
+    }
+    sync();
+    btn.addEventListener('click', function(){
+      var next = root.getAttribute('data-theme')==='dark' ? 'light' : 'dark';
+      apply(next); try{ localStorage.setItem(KEY, next); }catch(e){} sync();
+    });
+    try{
+      var mq=window.matchMedia('(prefers-color-scheme: dark)');
+      var onOS=function(){ try{ if(localStorage.getItem(KEY)) return; }catch(_){ } apply(mq.matches?'dark':'light'); sync(); };
+      if(mq.addEventListener) mq.addEventListener('change', onOS);
+      else if(mq.addListener) mq.addListener(onOS);
+    }catch(e){}
+  }
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded', wire); else wire();
+})();
+</script>
 </head>
 <body class="no-export">
 <div class="wrap">
   <header>
+    <button type="button" id="theme-toggle" class="theme-toggle" aria-label="Switch to dark mode" title="Dark mode">
+      <svg class="ic-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      <svg class="ic-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><path d="M12 2v2.4M12 19.6V22M4.2 4.2l1.7 1.7M18.1 18.1l1.7 1.7M2 12h2.4M19.6 12H22M4.2 19.8l1.7-1.7M18.1 5.9l1.7-1.7"/></svg>
+    </button>
     <p class="eyebrow">Post-Tonal Music Theory Tools</p>
     <h1 id="app-h1"><span class="tt">Row, Row</span>, Row Your Tone</h1>
     <button type="button" id="lede-toggle" class="lede-toggle" aria-expanded="false">How this works <span class="lt-caret">⌄</span></button>
